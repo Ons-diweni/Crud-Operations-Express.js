@@ -10,9 +10,11 @@ router.post("/add" , UserController.add)
 // Route pour récupérer tous les utilisateurs de la base de donnèe
 router.get('/users', UserController.find);
 
-// Route pour récupérer un utilisateur par ID
+// Route pour récupérer un utilisateur par son ID
 router.get('/user/:id', UserController.find);
 
+// Route pour supprimer un utilisateur par son ID
+router.delete('/delete/:id', UserController.delete);
 
 
 

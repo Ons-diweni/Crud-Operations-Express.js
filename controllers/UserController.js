@@ -23,29 +23,24 @@ exports.find = (req , res , next ) => {
  
     const id = req.params.id ;
     (id)? User.findOne({_id :req.params.id })
-    .then((data) => {(data)? res.send(data):res.status(404).send({message :"Not found user with id "+ req.params.id })})
-    .catch((err) =>res.status(500).send({ message: "Error retrieving user with id " + req.params.id})): User.find()
+    .then((user) => {(user)? res.send(user):res.status(404).send({message :"Not found user with id "+ req.params.id })})
+    .catch((err) =>res.status(500).send({ message: "Error retrieving user with id " + req.params.id}))
+    :User.find()
     .then((users) => res.send(users))
     .catch((err)=> res.send({message : "Error retrieving users"}))
 } 
-//*************************getById ********************/
 
-exports.getById = ( req , res , next ) => {
-User.findOne({_id : req.params.id}) 
-.then((user) => {(user)?res.status(200).json(user):res.status(404).send({message :"Not found user with id "+ req.params.id })})
-.catch((err) => res.status(500).send({ message: "Error retrieving user with id " + req.params.id +err}))
-} 
+//**************************** Endpoint to delete a User **************** */
 
-//****************************getAll**************** */
-
- exports.udpate = (req, res, next)  => {
-    User.updateOne({ _id: req.params.id }, { ...req.body, _id: req.params.id })
-      .then(() => res.status(200).json({ message: 'Objet modifié !'}))
-      .catch(error => res.status(400).json({ error }));
-  };
+exports.delete = (req, res)=>{
+    const id = req.params.id;
+    User.findByIdAndDelete(id)
+    .then(user => { (!user)?  res.status(404).send({ message : `Cannot Delete with id ${id}. Maybe id is wrong`})
+    :res.send({ message : "User was deleted successfully!"}) })
+    .catch(err =>{res.status(500).send({message: "Could not delete User with id=" + id  , error : err}); });
+}
 
 
-/********************************************** */
 
 
 
