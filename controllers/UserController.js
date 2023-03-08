@@ -3,17 +3,18 @@ const User = require ('../models/User.js')
 
 
 //*****************************Create ****************/
-exports.add =(req , res , next ) => {
+
+ exports.add = (req , res , next ) => {
     console.log(req.body)
-    if(!req.body){
+    if(Object.keys(req.body).length === 0){
         res.status(400).send({ message : "Content can not be emtpy!"});
         return;
     }
     const newUser  = new User ({...req.body})
     newUser.save()
-    .then((data)=>res.status(201).json({message:"User added with sucess !"}).send(data))
+    .then((user)=>res.status(201).json({message:"User added with sucess !" , user }))
     .catch(err => res.status(400).json({message : err.message || "Some error occurred while creating a user"}));
-
+    
   }
 
 //***************************** Read ******************/
