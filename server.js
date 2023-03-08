@@ -34,5 +34,5 @@ server.on('listening', () => {
     const bind = typeof address === 'string' ? 'pipe ' + address : 'port ' + process.env.PORT;
     console.log('Listening on ' + bind);
 });
-server.on('request' , (req,res) => {console.log(req.url)})
+server.on('request' , (req,res) => {console.log('EndPoint Path :'+req.url)})
 server.listen(process.env.PORT)
