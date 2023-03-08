@@ -41,7 +41,18 @@ exports.delete = (req, res)=>{
 }
 
 
+//**************************** Endpoint to delete a User **************** */
+exports.update = (req, res)=>{
 
+    if(Object.keys(req.body).length === 0){ return res.status(400).send({ message : "User with new informations must be provided"})}
 
+    const id = req.params.id;
+
+    //The { useFindAndModify: false} option is used to avoid using the deprecated findAndModify() method
+    //The { new: true } option tells Mongoose to return the updated document instead of the original one.
+    User.findByIdAndUpdate(id,req.body, { useFindAndModify: false , new: true})
+    .then(user => {(!user) ? res.status(404).send({ message : `Cannot Update user with ${id}. Maybe user not found!`}) :res.send(user)})
+    .catch(err => res.status(500).send({ message : "Error Update user information" , error : err}))
+}
 
 

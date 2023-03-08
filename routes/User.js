@@ -16,6 +16,8 @@ router.get('/user/:id', UserController.find);
 // Route pour supprimer un utilisateur par son ID
 router.delete('/delete/:id', UserController.delete);
 
+// Route pour modifier un utilisateur par son ID
+router.put('/update/:id', UserController.update);
 
 
 module.exports=router
