@@ -41,7 +41,7 @@ exports.delete = (req, res)=>{
 }
 
 
-//**************************** Endpoint to delete a User **************** */
+//**************************** Endpoint to update a User **************** */
 exports.update = (req, res)=>{
 
     if(Object.keys(req.body).length === 0){ return res.status(400).send({ message : "User with new informations must be provided"})}
