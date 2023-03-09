@@ -19,10 +19,11 @@ const App = express ()
 //This middleware function is typically used for APIs that receive JSON data in the request body like this one
 App.use(express.json())
 App.use(express.urlencoded({ extended: false }));
+
+
+
+//routes configuration 
 App.use("/user" , UserRoute)
-
-
-//Configuration des routes 
 
 
 //export the App instance to use it in other modules in this project
